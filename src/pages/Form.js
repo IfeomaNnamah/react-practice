@@ -17,16 +17,19 @@ class Form extends React.Component {
     }
 
     submitForm = () => {
-        console.log(this.state)
         this.props.handleSubmit(this.state)//submit form
         this.setState(this.initialState)//clear state information
     }
 
     render() {
         const {name, job} = this.state        
-
+        const formStyle = {
+            width: "50%",
+            margin: "10px"
+        }
         return (
-            <form style={{padding: "16px 12px"}}>
+            <form style={formStyle}>
+                <h4>Form</h4>
                 <label htmlFor="name">Name</label>
                 <input
                     type="text"

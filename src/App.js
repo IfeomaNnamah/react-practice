@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import Person from './Person'
-import Student from './Student'
-import Table from './Table'
-import Form from './Form'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './Layout'
+import Person from './pages/Person'
+import Student from './pages/Student'
+import Table from './pages/Table'
+import Form from './pages/Form'
+import Api from './pages/Api'
+import Todo from './pages/Todo'
 
 class App extends Component {
     state = {
@@ -64,30 +68,50 @@ class App extends Component {
         //     "Ifeoma", "Olive", "Nnamah", "John"
         // ]
 
-        const name = "Ifeoma"
-        const grade = "A"        
+        // const name = "Ifeoma"
+        // const grade = "A" 
+
+        const container = {
+            display: "flex",
+            justifyContent: "between",
+            marginTop: "10px"
+        }         
+        
     
+        // return (
+        //     <div>                
+        //         {/* {
+        //             names.map((name, index) => {
+        //                 return (
+        //                     <>
+        //                         <p><span>{index + 1}. </span>{name}</p>
+        //                         <button onClick={() => this.deleteName(index)}>Delete</button><hr/>
+        //                     </>                            
+        //                 )
+        //             })
+        //         } */}
+        //     </div>      
+        // )
+
         return (
-            <div>
-                <Person />
-                <Student name={name} grade={grade} />
-                <div>
-                    <Table tableData={data} removeRow={this.removeRow} />
-                    <Form handleSubmit={this.handleSubmit} />
-                </div>
-                
-                {/* {
-                    names.map((name, index) => {
-                        return (
-                            <>
-                                <p><span>{index + 1}. </span>{name}</p>
-                                <button onClick={() => this.deleteName(index)}>Delete</button><hr/>
-                            </>                            
-                        )
-                    })
-                } */}
-            </div>      
-        )
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Person />} />
+                  <Route path="student" element={<Student />} />
+                  <Route path="employee" element={
+                    <div style={container}>
+                        <Table tableData={data} removeRow={this.removeRow} />
+                        <Form handleSubmit={this.handleSubmit} />
+                    </div>
+                  } />
+                  <Route path="api" element={<Api />} />
+                  <Route path="todo" element={<Todo />} />
+                  {/* <Route path="*" element={<NoPage />} /> */}
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          );
     }
 }
 

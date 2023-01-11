@@ -33,10 +33,13 @@ class Table extends React.Component {
     render() {    
         // const data = this.props.tableData    
         const {tableData, removeRow} = this.props    // similar to above using deconstruction 
+        const tableStyle = {
+            width: "50%",
+            margin: "10px"
+        }
         return (
             <>
-                <h5>Using Props and Map</h5>
-                <table>
+                <table style={tableStyle}>
                     <TableHeader />
                     <TableBody tableData={tableData} removeRow={removeRow} />
                 </table>
